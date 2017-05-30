@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using Giver.ValueGenerators;
 
@@ -6,6 +8,7 @@ namespace Giver {
 
     public class Give {
         private static readonly IList<IValueGenerator> _defaultGenerators;
+        internal static Lazy<Give> Instance = new Lazy<Give>();
         private IList<IValueGenerator> _generators;
 
         static Give() {
@@ -45,15 +48,23 @@ namespace Giver {
                 : _defaultGenerators;
         }
 
+        public virtual T Now<T>() where T : new() {
+            return GenerateInstance<T>();
+        }
+
+        public virtual List<T> Now<T>(int count) where T : new() {
+            return GenerateList<T>(count);
+        }
+
         public virtual Builder<T> Me<T>() where T : new() {
             return new Builder<T>(this);
         }
 
-        public virtual T Now<T>() where T : new() {
-            return Now<T>(Helper.GetPrimitiveMembers(typeof(T)));
+        internal T GenerateInstance<T>(List<Action<T>> buildActions = null) where T : new() {
+            return GenerateInstance(Helper.GetPrimitiveMembers<T>(), buildActions);
         }
 
-        internal T Now<T>(IEnumerable<Member> members) where T : new() {
+        internal T GenerateInstance<T>(IEnumerable<Member> members, List<Action<T>> buildActions = null) where T : new() {
             var t = new T();
 
             foreach (var member in members) {
@@ -63,15 +74,41 @@ namespace Giver {
                 }
             }
 
+            if (buildActions != null) {
+                Helper.RunBuildActions(t, buildActions);
+            }
+
             return t;
+        }
+
+        internal List<T> GenerateList<T>(int count, List<Action<T>> buildActions = null) where T : new() {
+            var list = new List<T>(count);
+            if (count <= 0) return list;
+
+            var members = Helper.GetPrimitiveMembers<T>();
+            for (var i = 0; i < count; i++) {
+                list.Add(GenerateInstance(members, buildActions));
+            }
+            return list;
         }
     }
 
-    public static class Give<T> where T : new() {
-        private static Give _give = new Give();
+    public class Give<T> where T : new() {
 
         public static Builder<T> ToMe() {
-            return _give.Me<T>();
+            return Give.Instance.Value.Me<T>();
+        }
+
+        public static T Now() {
+            return Give.Instance.Value.Now<T>();
+        }
+
+        public static List<T> Now(int count) {
+            return Give.Instance.Value.Now<T>(count);
+        }
+
+        public static implicit operator T(Give<T> give) {
+            return Give.Instance.Value.Now<T>();
         }
     }
 }

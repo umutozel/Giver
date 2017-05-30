@@ -21,7 +21,7 @@ namespace Giver.Tests {
 
         [Fact]
         public void With_Order() {
-            TestModel testModel = _give.Me<TestModel>().With(tm => tm.OrdersProp = _give.Me<Order>().Now(5));
+            TestModel testModel = _give.Me<TestModel>().With(tm => tm.OrdersProp = _give.Now<Order>(5));
 
             Assert.Equal(testModel.OrdersProp.Count, 5);
         }
