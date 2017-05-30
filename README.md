@@ -1,6 +1,6 @@
 # Giver
 Generate gibberish filled objects!
-I needed a dummy object generator for my .net core unit tests, so I developed this last night.
+I needed a dummy object generator for my .net core unit tests, and here we are.
 Supports .Net Standard 1.0.
 
 ## Static API
