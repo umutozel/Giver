@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
 using Giver.ValueGenerators;
 
@@ -26,7 +25,8 @@ namespace Giver {
                 new UInt16Generator(),
                 new UInt32Generator(),
                 new UInt64Generator(),
-                new StringGenerator()
+                new StringGenerator(),
+                new DateTimeGenerator()
             };
         }
 
@@ -43,21 +43,20 @@ namespace Giver {
         }
 
         private void Init(IEnumerable<IValueGenerator> generators) {
-            _generators = generators != null
-                ? generators.Union(_defaultGenerators).ToList()
-                : _defaultGenerators;
+            _generators = generators?.Union(_defaultGenerators).ToList() ?? _defaultGenerators;
         }
 
-        public virtual T Now<T>() where T : new() {
+        public virtual T Single<T>() where T : new() {
             return GenerateInstance<T>();
         }
 
-        public virtual List<T> Now<T>(int count) where T : new() {
+        public virtual List<T> Many<T>(int count) where T : new() {
             return GenerateList<T>(count);
         }
 
-        public virtual Builder<T> Me<T>() where T : new() {
-            return new Builder<T>(this);
+        public virtual Builder<T> Me<T>(Action<T> buildAction = null) where T : new() {
+            var builder = new Builder<T>(this);
+            return buildAction != null ? builder.With(buildAction) : builder;
         }
 
         internal T GenerateInstance<T>(List<Action<T>> buildActions = null) where T : new() {
@@ -95,20 +94,20 @@ namespace Giver {
 
     public class Give<T> where T : new() {
 
-        public static Builder<T> ToMe() {
-            return Give.Instance.Value.Me<T>();
+        public static Builder<T> ToMe(Action<T> buildAction = null) {
+            return Give.Instance.Value.Me(buildAction);
         }
 
-        public static T Now() {
-            return Give.Instance.Value.Now<T>();
+        public static T Single() {
+            return Give.Instance.Value.Single<T>();
         }
 
-        public static List<T> Now(int count) {
-            return Give.Instance.Value.Now<T>(count);
+        public static List<T> Many(int count) {
+            return Give.Instance.Value.Many<T>(count);
         }
 
         public static implicit operator T(Give<T> give) {
-            return Give.Instance.Value.Now<T>();
+            return Give.Instance.Value.Single<T>();
         }
     }
 }

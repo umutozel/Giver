@@ -72,6 +72,11 @@ namespace Giver.Tests.Model {
         public UInt64? UInt64Field;
         public UInt64 NullableUInt64Field;
 
+        public DateTime DateTimeProp { get; set; }
+        public DateTime DateTimeField;
+        public DateTime? NullableDateTimeProp { get; set; }
+        public DateTime? NullableDateTimeField;
+
         public ICollection<Order> OrdersProp { get; set; }
         public Company CompanyField;
     }

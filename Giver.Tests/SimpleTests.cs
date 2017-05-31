@@ -8,7 +8,7 @@ namespace Giver.Tests {
 
         [Fact]
         public void Static_Api_Single() {
-            var testModel = Give<TestModel>.ToMe().Now();
+            var testModel = Give<TestModel>.Single();
 
             Assert.NotNull(testModel);
             Assert.Null(testModel.CompanyField);
@@ -26,7 +26,7 @@ namespace Giver.Tests {
 
         [Fact]
         public void Static_Api_Multi() {
-            var testModels = Give<TestModel>.ToMe().Now(5);
+            var testModels = Give<TestModel>.Many(5);
 
             Assert.Equal(testModels.Count, 5);
             Assert.True(testModels.All(tm => tm != null && tm.CompanyField == null && tm.OrdersProp == null));
@@ -35,7 +35,7 @@ namespace Giver.Tests {
         [Fact]
         public void Instance_Api_Single() {
             var give = new Give();
-            var testModel = give.Me<TestModel>().Now();
+            var testModel = give.Single<TestModel>();
 
             Assert.NotNull(testModel);
             Assert.Null(testModel.CompanyField);
@@ -55,7 +55,7 @@ namespace Giver.Tests {
         [Fact]
         public void Instance_Api_Multi() {
             var give = new Give();
-            var testModels = give.Me<TestModel>().Now(5);
+            var testModels = give.Many<TestModel>(5);
 
             Assert.Equal(testModels.Count, 5);
             Assert.True(testModels.All(tm => tm != null && tm.CompanyField == null && tm.OrdersProp == null));

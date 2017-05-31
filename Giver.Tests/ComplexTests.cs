@@ -14,14 +14,14 @@ namespace Giver.Tests {
 
         [Fact]
         public void Custom_String_Generated() {
-            Company company = _give.Me<Company>();
+            var company = _give.Single<Company>();
 
             Assert.Equal(company.CompanyName, "DT");
         }
 
         [Fact]
         public void With_Order() {
-            TestModel testModel = _give.Me<TestModel>().With(tm => tm.OrdersProp = _give.Now<Order>(5));
+            var testModel = _give.Me<TestModel>().With(tm => tm.OrdersProp = _give.Many<Order>(5)).Now();
 
             Assert.Equal(testModel.OrdersProp.Count, 5);
         }
@@ -32,16 +32,19 @@ namespace Giver.Tests {
 
             Assert.NotNull(testModel.CompanyField);
         }
+
+        [Fact]
+        public void With_Many() {
+            var testModels = _give.Me<TestModel>().With(tm => tm.CompanyField = _give.Me<Company>()).Now(5);
+
+            Assert.Equal(testModels.Count, 5);
+        }
     }
 
     public class CustomStringGenerator: StringGenerator {
 
         public override string GetValue(MemberInfo memberInfo) {
-            if (memberInfo.Name == "CompanyName") {
-                return "DT";
-            }
-
-            return base.GetValue(memberInfo);
+            return memberInfo.Name == "CompanyName" ? "DT" : base.GetValue(memberInfo);
         }
     }
 }
