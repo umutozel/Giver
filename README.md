@@ -17,7 +17,7 @@ var testModel = Give<TestModel>
                 .With(tm => tm.CompanyField = Give<Company>.Single())
                 .Now();
 
-// you can emit .Now() when explicitly declaring the type
+// you can omit .Now() when explicitly declaring the type
 TestModel testModel = Give<TestModel>
                 .ToMe(tm => tm.OrdersProp = Give<Order>.Many(5))
                 .With(tm => tm.CompanyField = Give<Company>.Single());
