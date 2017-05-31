@@ -33,6 +33,13 @@ namespace Giver.Tests {
         }
 
         [Fact]
+        public void Static_Api_Implicit_Cast() {
+            TestModel testModel = new Give<TestModel>();
+
+            Assert.NotNull(testModel);
+        }
+
+        [Fact]
         public void Instance_Api_Single() {
             var give = new Give();
             var testModel = give.Single<TestModel>();
