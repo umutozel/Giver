@@ -61,7 +61,7 @@ namespace Giver.Tests {
 
         [Fact]
         public void Instance_Api_Multi() {
-            var give = new Give();
+            var give = new Give(Enumerable.Empty<IValueGenerator>());
             var testModels = give.Many<TestModel>(5);
 
             Assert.Equal(testModels.Count, 5);

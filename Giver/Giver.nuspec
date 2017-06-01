@@ -3,15 +3,20 @@
   <metadata>
     <id>Giver</id>
     <version>0.1</version>
-    <title>Giver: generate gibberish filled objects</title>
+    <title>Generate gibberish filled objects</title>
     <authors>Umut Özel</authors>
     <owners>Umut Özel</owners>
     <licenseUrl>https://github.com/umutozel/Giver/blob/master/LICENSE</licenseUrl>
     <projectUrl>https://github.com/umutozel/Giver</projectUrl>
-    <iconUrl>https://image.ibb.co/itRs6Q/logo.png</iconUrl>
+    <iconUrl>https://image.ibb.co/nyxz8F/logo.png</iconUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
-    <description>Give&lt;Customer&gt;.Now()</description>
-    <summary>give.Me&lt;Customer&gt;().With(c => c.Address = give.Me&lt;Address&gt;()).</summary>
+    <Description>
+      Generate gibberish filled objects
+
+      Give&lt;Customer&gt;.ToMe()
+      give.Me&lt;Customer&gt;().With(c =&gt; c.Address = give.Me&lt;Address&gt;())
+    </Description>
+    <summary>Generate gibberish filled objects</summary>
     <copyright>Copyright (c) 2017</copyright>
     <language>en-US</language>
     <tags>Unit Test Object Generate Give</tags>

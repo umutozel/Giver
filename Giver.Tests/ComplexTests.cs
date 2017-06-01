@@ -28,9 +28,12 @@ namespace Giver.Tests {
 
         [Fact]
         public void With_Company() {
-            TestModel testModel = _give.Me<TestModel>().With(tm => tm.CompanyField = _give.Me<Company>());
+            TestModel testModel = _give.Me<TestModel>()
+                .With(tm => tm.CompanyField = _give.Me<Company>())
+                .With(tm => tm.OrdersProp = _give.Many<Order>(0));
 
             Assert.NotNull(testModel.CompanyField);
+            Assert.True(testModel.OrdersProp != null && testModel.OrdersProp.Count == 0);
         }
 
         [Fact]

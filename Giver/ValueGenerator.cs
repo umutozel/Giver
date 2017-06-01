@@ -13,9 +13,7 @@ namespace Giver {
             return typeof(T) == memberType;
         }
 
-        public virtual T GetValue(MemberInfo memberInfo) {
-            return default(T);
-        }
+        public abstract T GetValue(MemberInfo memberInfo);
 
         object IValueGenerator.GetValue(MemberInfo memberInfo) {
             return GetValue(memberInfo);
