@@ -3,6 +3,15 @@ Generate gibberish filled objects!
 
 Supports .Net Standard 1.0.
 
+[![Build status](https://ci.appveyor.com/api/projects/status/9k145c91go069t70?svg=true)](https://ci.appveyor.com/project/umutozel/giver)
+[![Coverage Status](https://coveralls.io/repos/github/umutozel/Giver/badge.svg?branch=master)](https://coveralls.io/github/umutozel/Giver?branch=master)
+[![NuGet Badge](https://buildstats.info/nuget/Giver)](https://www.nuget.org/packages/Giver/)
+[![GitHub issues](https://img.shields.io/github/issues/umutozel/Giver.svg)](https://github.com/umutozel/Giver/issues)
+[![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://raw.githubusercontent.com/umutozel/Giver/master/LICENSE)
+
+[![GitHub stars](https://img.shields.io/github/stars/umutozel/Giver.svg?style=social&label=Star)](https://github.com/umutozel/Giver)
+[![GitHub forks](https://img.shields.io/github/forks/umutozel/Giver.svg?style=social&label=Fork)](https://github.com/umutozel/Giver)
+
 ```csharp
 // static api
 // take an instance
