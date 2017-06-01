@@ -19,7 +19,7 @@ var testModel = Give<TestModel>
 
 // you can omit .Now() when explicitly declaring the type
 TestModel testModel = Give<TestModel>
-                .ToMe(tm => tm.OrdersProp = Give<Order>.Many(5))
+                .ToMe()
                 .With(tm => tm.CompanyField = Give<Company>.Single());
 
 // build a list
