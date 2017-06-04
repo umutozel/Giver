@@ -23,9 +23,9 @@ after_build:
 - appveyor PushArtifact Giver\bin\%CONFIGURATION%\Giver.%appveyor_build_version%.nupkg
 
 test_script:
+- nuget install OpenCover -Version 4.6.519 -OutputDirectory tools
 #- dotnet test Giver.Tests/Giver.Tests.csproj --configuration %CONFIGURATION% --no-build
 - .\tools\OpenCover.4.6.519\tools\OpenCover.Console.exe -target:"C:\Program Files\dotnet\dotnet.exe" -targetargs:"test .\Giver.Tests\Giver.Tests.csproj" -register:user -oldStyle -output:.\opencoverCoverage.xml -hideskipped:File -filter:"+[Giver*]* -[Giver.*Tests*]*" -mergeoutput 
-#- nuget install OpenCover -Version 4.6.519 -OutputDirectory tools
 #- nuget install coveralls.net -Version 0.7.0 -OutputDirectory tools
 #- .\tools\OpenCover.4.6.519\tools\OpenCover.Console.exe -target:"C:\Program Files\dotnet\dotnet.exe" -targetargs:"test .\Giver.Tests\Giver.Tests.csproj" -register:user -oldStyle -output:.\opencoverCoverage.xml
 #- .\tools\coveralls.net.0.7.0\tools\csmacnz.Coveralls.exe --opencover -i opencoverCoverage.xml --repoToken "%COVERALLS_REPO_TOKEN%" --useRelativePaths --commitId "%APPVEYOR_REPO_COMMIT%" --commitBranch "%APPVEYOR_REPO_BRANCH%" --commitAuthor "%APPVEYOR_REPO_COMMIT_AUTHOR%" --commitEmail "%APPVEYOR_REPO_COMMIT_AUTHOR_EMAIL%" --commitMessage "%APPVEYOR_REPO_COMMIT_MESSAGE%" --jobId "%APPVEYOR_BUILD_NUMBER%" --serviceName appveyor
