@@ -24,7 +24,6 @@ after_build:
 
 test_script:
 - nuget install OpenCover -Version 4.6.519 -OutputDirectory tools
-#- dotnet test Giver.Tests/Giver.Tests.csproj --configuration %CONFIGURATION% --no-build
 - .\tools\OpenCover.4.6.519\tools\OpenCover.Console.exe -target:"C:\Program Files\dotnet\dotnet.exe" -targetargs:"test .\Giver.Tests\Giver.Tests.csproj" -register:user -oldStyle -output:.\opencoverCoverage.xml -hideskipped:File -filter:"+[Giver*]* -[Giver.*Tests*]*" -mergeoutput 
 #- nuget install coveralls.net -Version 0.7.0 -OutputDirectory tools
 #- .\tools\OpenCover.4.6.519\tools\OpenCover.Console.exe -target:"C:\Program Files\dotnet\dotnet.exe" -targetargs:"test .\Giver.Tests\Giver.Tests.csproj" -register:user -oldStyle -output:.\opencoverCoverage.xml
