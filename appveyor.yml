@@ -23,7 +23,7 @@ after_build:
 - appveyor PushArtifact Giver\bin\%CONFIGURATION%\Giver.%appveyor_build_version%.nupkg
 
 test_script:
-- dotnet test
+- C:\Program Files\dotnet\dotnet.exe test .\Giver.Tests\Giver.Tests.csproj
 #- nuget install OpenCover -Version 4.6.519 -OutputDirectory tools
 #- nuget install coveralls.net -Version 0.7.0 -OutputDirectory tools
 #- .\tools\OpenCover.4.6.519\tools\OpenCover.Console.exe -target:"C:\Program Files\dotnet\dotnet.exe" -targetargs:"test .\Giver.Tests\Giver.Tests.csproj" -register:user -oldStyle -output:.\opencoverCoverage.xml
