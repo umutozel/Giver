@@ -29,10 +29,7 @@ namespace Giver {
                 return;
             }
 
-            var fieldInfo = memberInfo as FieldInfo;
-            if (fieldInfo == null) throw new InvalidOperationException($"Cannot set {memberInfo}.");
-
-            fieldInfo.SetValue(instance, value);
+            ((FieldInfo)memberInfo).SetValue(instance, value);
         }
 
         public static int NextIntRange(this Random random) {
