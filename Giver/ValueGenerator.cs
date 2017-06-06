@@ -6,9 +6,15 @@ namespace Giver {
     public abstract class ValueGenerator<T>: IValueGenerator {
 
         public virtual bool CanGenerate(Type memberType, MemberInfo memberInfo) {
+#if NET_STANDARD
             if (memberType.GetTypeInfo().IsGenericType && memberType.GetGenericTypeDefinition() == typeof(Nullable<>)) {
                 memberType = memberType.GenericTypeArguments[0];
             }
+#else
+            if (memberType.IsGenericType && memberType.GetGenericTypeDefinition() == typeof(Nullable<>)) {
+                memberType = memberType.GetGenericArguments()[0];
+            }
+#endif
 
             return typeof(T) == memberType;
         }
