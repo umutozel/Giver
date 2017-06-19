@@ -3,23 +3,18 @@
   <PropertyGroup>
     <TargetFrameworks>netstandard1.0;net45</TargetFrameworks>
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
-    <Version>0.1</Version>
     <Authors>Umut Özel</Authors>
-    <summary>Generate gibberish filled objects</summary>
-    <Description>Generate gibberish filled objects
-
+    <Description>Generate gibberish filled objects.
+    
 Give&lt;Customer&gt;.ToMe()
 give.Me&lt;Customer&gt;().With(c =&gt; c.Address = give.Me&lt;Address&gt;())</Description>
-    <Company></Company>
-    <NeutralLanguage>en</NeutralLanguage>
     <Copyright>Copyright (c) 2017</Copyright>
     <PackageLicenseUrl>https://github.com/umutozel/Giver/blob/master/LICENSE</PackageLicenseUrl>
     <PackageProjectUrl>https://github.com/umutozel/Giver</PackageProjectUrl>
+    <PackageIconUrl>https://image.ibb.co/nyxz8F/logo.png</PackageIconUrl>
+    <PackageTags>Unit Test Object Generate Give</PackageTags>
     <RepositoryUrl>https://github.com/umutozel/Giver</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
-    <PackageTags>Unit Test Object Generate Give</PackageTags>
-    <GeneratePackageOnBuild>False</GeneratePackageOnBuild>
-    <PackageIconUrl>https://image.ibb.co/nyxz8F/logo.png</PackageIconUrl>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(TargetFramework)' == 'netstandard1.0'">
