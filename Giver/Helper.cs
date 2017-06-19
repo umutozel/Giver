@@ -9,23 +9,35 @@ namespace Giver {
 
         public static List<Member> GetPrimitiveMembers<T>() {
             var type = typeof(T);
+#if NET_STANDARD
             return type.GetRuntimeProperties()
-                .Where(p => p.SetMethod.IsPublic && !p.SetMethod.IsStatic && IsPrimitive(p.PropertyType))
+#else
+            return type.GetProperties(BindingFlags.Public | BindingFlags.Instance)
+#endif
+                .Where(p => IsPrimitive(p.PropertyType))
                 .Select(p => new Member(p, p.PropertyType))
+#if NET_40
+                .Union(type.GetFields()
+#else
                 .Union(type.GetRuntimeFields()
+#endif
                     .Where(f => f.IsPublic && !f.IsStatic && IsPrimitive(f.FieldType))
                     .Select(f => new Member(f, f.FieldType))
                 ).ToList();
         }
 
         public static bool IsPrimitive(Type type) {
+#if NET_STANDARD
             return type.GetTypeInfo().IsValueType || type == typeof(string);
+#else
+            return type.IsValueType || type == typeof(string);
+#endif
         }
 
         public static void SetValue(object instance, MemberInfo memberInfo, object value) {
             var propertyInfo = memberInfo as PropertyInfo;
             if (propertyInfo != null) {
-                propertyInfo.SetValue(instance, value);
+                propertyInfo.SetValue(instance, value, null);
                 return;
             }
 
