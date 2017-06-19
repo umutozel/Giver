@@ -3,7 +3,7 @@ Generate gibberish filled objects!
 
 Supports .Net Standard 1.0.
 
-[![Build status](https://ci.appveyor.com/api/projects/status/9k145c91go069t70?svg=true)](https://ci.appveyor.com/project/umutozel/giver)
+[![Build status](https://ci.appveyor.com/api/projects/status/777i8b6av83xs7gu?svg=true)](https://ci.appveyor.com/project/umutozel/giver)
 [![Coverage Status](https://coveralls.io/repos/github/umutozel/Giver/badge.svg?branch=master)](https://coveralls.io/github/umutozel/Giver?branch=master)
 [![NuGet Badge](https://buildstats.info/nuget/Giver)](https://www.nuget.org/packages/Giver/)
 [![GitHub issues](https://img.shields.io/github/issues/umutozel/Giver.svg)](https://github.com/umutozel/Giver/issues)
