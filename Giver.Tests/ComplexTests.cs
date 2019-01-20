@@ -46,7 +46,8 @@ namespace Giver.Tests {
         [Fact]
         public void ReadOnly_Property()
         {
-            OrderLine orderLine = _give.Me<OrderLine>();
+            OrderLine orderLine = _give.Me<OrderLine>()
+                .With(ol => ol.Quantity = 1);
 
             Assert.Equal(orderLine.Price * orderLine.Quantity, orderLine.TotalPrice);
         }
