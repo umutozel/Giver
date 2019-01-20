@@ -42,6 +42,15 @@ namespace Giver.Tests {
 
             Assert.Equal(testModels.Count, 5);
         }
+
+        [Fact]
+        public void ReadOnly_Property()
+        {
+            OrderLine orderLine = _give.Me<OrderLine>()
+                .With(ol => ol.Quantity = 1);
+
+            Assert.Equal(orderLine.Price * orderLine.Quantity, orderLine.TotalPrice);
+        }
     }
 
     public class CustomStringGenerator: StringGenerator {

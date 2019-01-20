@@ -14,7 +14,7 @@ namespace Giver {
 #else
             return type.GetProperties(BindingFlags.Public | BindingFlags.Instance)
 #endif
-                .Where(p => IsPrimitive(p.PropertyType))
+                .Where(p => IsPrimitive(p.PropertyType) && p.HasSetter())
                 .Select(p => new Member(p, p.PropertyType))
 #if NET_40
                 .Union(type.GetFields()
@@ -31,6 +31,15 @@ namespace Giver {
             return type.GetTypeInfo().IsValueType || type == typeof(string);
 #else
             return type.IsValueType || type == typeof(string);
+#endif
+        }
+
+        public static bool HasSetter(this PropertyInfo propertyInfo)
+        {
+#if NET_40
+            return propertyInfo.GetSetMethod() != null;
+#else
+            return propertyInfo.SetMethod != null;
 #endif
         }
 
